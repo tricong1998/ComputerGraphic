@@ -1,2 +1,2 @@
 # ComputerGraphic
-Drawing Fractal by L-System
+Drawing Fern by L-System
