@@ -2,6 +2,7 @@
 #include<gl/glut.h>
 #include<cmath>
 #include"generate.h"
+#include"drawLine.h"
 #define DIS 10
 using namespace std;
 // Xu lý xoay hinh
@@ -12,6 +13,9 @@ float delta_angle = 0.0;
 float g_x_origin = 0.0;
 bool g_is_rotate = false;
 
+//GLuint g_box1;
+//GLuint g_box2;
+//GLuint g_box3;
 void MouseButton(int type_button, int state, int x, int y) {
 	if (type_button == GLUT_LEFT_BUTTON) {
 		if (state == GLUT_DOWN) {
@@ -78,9 +82,15 @@ void Init()
  
   GLfloat shininess = 50.0f;
   glMateriali(GL_FRONT, GL_SHININESS, shininess);
- 
+ 	
   g_x = DIS * sin(g_angle);
   g_z = DIS * cos(g_angle);
+  
+  
+ // g_box1 = MakeCylinder(0.02,0.3);
+//  g_box2 = MakeCylinder(0.02,0.5);
+//  g_box3 = MakeCylinder(0.02,0.25);
+  
 }
  
 void ReShape(int width, int height)
@@ -92,23 +102,28 @@ void ReShape(int width, int height)
 // 	glOrtho(-1.0, 1.0, -1.0, 1.0, 1, 10.0);
 
  	float ratio = (float)width/(float)height;
- 	gluPerspective(35.0,ratio,1.0,100.0);
+ 	gluPerspective(30.0,ratio,1.0,100.0);
  	glMatrixMode(GL_MODELVIEW);
 }
  
 void RenderScene()
 {
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glLoadIdentity();
-  gluLookAt(g_x, 1, g_z, 0.0, 0.0, 0.0, 0.0,1.0, 0.0);
-  
+
+  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  	glLoadIdentity();
+  	gluLookAt(g_x, 1, g_z, 0.0, 0.0, 0.0, 0.0,1.0, 0.0);
+	glPushMatrix();
 //	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-  toaDo();
+//  toaDo();
   
 //  glTranslatef(0,0,-2);
-  draw();
-  glFlush();
-  glutPostRedisplay();
+	 draw();
+//	 drawLine(3);
+//	glutWireTeapot(1.0);
+
+	glPopMatrix();
+  	glFlush();
+	glutPostRedisplay();
   
 }
 
@@ -129,12 +144,15 @@ int main()
  
   glutDisplayFunc(RenderScene);
  // genarate();
-  for (int i=0;i<2; i++) {
+  for (int i=0;i<3; i++) {
   		genarate();
   		cout<< "\n";
   }
+  
+  //glutIdleFunc(show_window);
   glutMouseFunc(MouseButton);
   glutMotionFunc(mouseMove);
+
   glutMainLoop();
   
   return 0;

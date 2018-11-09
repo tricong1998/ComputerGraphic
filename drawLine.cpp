@@ -20,7 +20,7 @@ void MakeCylinder(const float& radius, const float& length)
 
 void drawLine(float x) {
 
-	MakeCylinder(0.02,x);
+	MakeCylinder(0.01,x);
 	glCallList(g_box);
 //	glTranslatef(0,x,0);
 }
