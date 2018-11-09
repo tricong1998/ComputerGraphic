@@ -55,6 +55,8 @@ void draw () {
 		char curent = str.at(i);
 		if(curent == 'F') {
 			drawLine(0.3);
+			
+			glTranslatef(0,0.3,0);
   			
 		}
 		else if(curent == '+') {
@@ -74,9 +76,15 @@ void draw () {
 		else if (curent == '!'){
 			if(S.empty()) {
 				drawLine(0.5);
+				glTranslatef(0,0.5,0);
 			}
 			else if (S.size() == 1) {
 				drawLine(0.25);
+				glTranslatef(0,0.25,0);
+			}
+			else if (S.size() == 2) {
+				drawLine(0.15);
+				glTranslatef(0,0.15,0);
 			}
 		}
 	}
